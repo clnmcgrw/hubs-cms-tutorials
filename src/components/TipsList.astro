@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+
+const {
+  homepage = false,
+  viewAll = false,
+} = Astro.props;
+
+let allPosts = await getCollection('posts');
+if (homepage) {
+  allPosts = allPosts.filter(post => post.data.homepage);
+}
+---
+<div class="hct-posts">
+  <ul class="hct-posts--list">
+    {allPosts.map(post => ( 
+    <li class="hct-posts--item">
+      <h3><a href={`/tips/${post.slug}`}>{post.data.title}</a></h3>
+      <p>{post.data.excerpt}</p>
+    </li>
+    ))}
+  </ul>
+  {viewAll && ( 
+    <div class="hct-postlist--all">
+      <a href="/tips" class="hct-btn -primary -icon">
+        <span>View All Tips</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+      </a>
+      <a href="/submit" class="hct-btn -ghost">
+        Contribute a Tip
+      </a>
+    </div>
+  )}
+</div>
+
+<style>
+.hct-posts--list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 1rem;
+}
+
+.hct-posts--item {
+  padding: 1.5rem 0;
+  margin: 0;
+  max-width: 47rem;
+
+  h3 {
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem;
+  }
+
+  p {
+    color: var(--slate-11);
+  }
+
+  h3 a {
+    display: inline-block;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--orange-9);
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--slate-12);
+  }
+
+  > a {
+    font-weight: var(--font-weight-bold);
+  }
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+}
+</style>
+
+

@@ -1,0 +1,237 @@
+---
+import PromoBar from '@/components/PromoBar.astro';
+import Logo from '@/components/shared/Logo.astro';
+
+const { promoBar = false } = Astro.props;
+---
+
+<header id="hct-header" class="hct-header">
+  {promoBar && (
+    <PromoBar />
+  )}
+  <div class="hct-header--main">
+    <div class="hct-header--liner">
+
+      <div class="hct-header--group">
+        <div class="hct-header--brand">
+          <Logo />
+        </div>
+
+        <div class="hct-header--navtoggle">
+          <button type="button" id="hct-nav-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-open">
+              <line x1="4" x2="20" y1="12" y2="12"/>
+              <line x1="4" x2="20" y1="6" y2="6"/>
+              <line x1="4" x2="20" y1="18" y2="18"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-close">
+              <path d="M18 6 6 18"/>
+              <path d="m6 6 12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav class="hct-header--nav">
+        <ul>
+          <li>
+            <a href="#0"><span>🔥</span>Tips</a>
+          </li>
+          <li>
+            <a href="#0"><span>📚</span>Tutorials</a>
+          </li>
+          <li>
+            <a href="#0"><span>🛒</span>Marketplace</a>
+          </li>
+        </ul>
+      </nav>
+      
+    </div>
+  </div>
+</header>
+
+<script>
+const navToggle = document.getElementById('hct-nav-toggle');
+if (navToggle) {
+  navToggle.addEventListener('click', event => {
+    event.preventDefault();
+    document.body.classList.toggle('is-open-nav');
+  });
+}
+</script>
+
+<style>
+.hct-header {
+  position: fixed;
+  z-index: 21999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--slate-1);
+}
+
+.hct-header--group {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--slate-5);
+}
+
+.hct-header--brand {
+  h1 {
+    font-size: 1.1rem;
+    margin: 0;
+    padding-top: 0.33rem;
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    color: var(--slate-12);
+    display: flex;
+    align-items: center;
+  }
+  svg {
+    color: var(--orange-9);
+    margin-right: 0.33rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.hct-header--navtoggle {
+  button {
+    position: relative;
+    right: -0.33rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--slate-11);
+  }
+
+  button svg {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1rem;
+    margin-left: -1rem;
+    transition: opacity 0.2s ease, transform 0.3s var(--ease-out-expo);
+  }
+
+  .icon-close {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.hct-header--nav {
+  position: relative;
+  max-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: max-height 0.35s ease, visibility 0.35s ease;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+  }
+
+  > ul {
+    padding: 1.5rem 1rem 2rem;
+    border-bottom: 1px solid var(--slate-5);
+  }
+
+  > ul > li > a {
+    display: block;
+    padding: 1rem 1.5rem;
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    color: var(--slate-12);
+    font-size: 1.1rem;
+    border-radius: var(--border-radius-default);
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--slate-4);
+    }
+
+    span {
+      display: inline-block;
+      margin-right: 0.75rem;
+    }
+  }
+}
+
+body.is-open-nav {
+  .hct-header--nav {
+    visibility: visible;
+    max-height: 185px;
+  }
+
+  .hct-header--navtoggle .icon-close {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .hct-header--navtoggle .icon-open {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@media (min-width:767px) {
+  .hct-header--navtoggle {
+    display: none;
+  }
+
+  .hct-header--group {
+    padding: 0;
+    border: none;
+  }
+
+  .hct-header--main {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--slate-5);
+  }
+
+  .hct-header--liner {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hct-header--nav {
+    display: block !important;
+    visibility: visible !important;
+    max-height: none !important;
+    border-bottom: none;
+
+    > ul {
+      padding: 0;
+      border-bottom: 0;
+    }
+
+    > ul > li {
+      margin-left: 0.33rem;
+    }
+
+    > ul > li > a {
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+
+      span {
+        margin-right: 0.33rem;
+      }
+    }
+  }
+
+  .hct-header--nav ul {
+    display: flex;
+  }
+}
+</style>

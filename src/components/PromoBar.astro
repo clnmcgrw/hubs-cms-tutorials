@@ -1,0 +1,78 @@
+---
+
+const {
+  title = 'Looking to get the most out of HubSpot?',
+  cta = 'We can help',
+  screenReader = 'Get Help with HubSpot CMS',
+} = Astro.props;
+---
+
+<div id="hct-promo" class="hct-promo" transition:persist>
+  <a href="/contact">
+    <span class="sr-only">{screenReader}</span>
+  </a>
+  <div class="hct-inner">
+    <div class="hct-promo--content">
+      <h5><span>{title}</span><span>{cta}</span></h5>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+    </div>
+  </div>
+</div>
+
+<script>
+const promoBar = document.getElementById('hct-promo');
+if (promoBar) {
+  const promoBarAnchor = promoBar.querySelector('a');
+  promoBarAnchor?.addEventListener('mouseenter', () => {
+    promoBar.classList.add('is-hovered');
+  });
+  promoBarAnchor?.addEventListener('mouseleave', () => {
+    promoBar.classList.remove('is-hovered');
+  });
+}
+</script>
+
+<style>
+.hct-promo {
+  position: relative;
+  background-color: var(--orange-9);
+  padding: 0.75rem 0;
+  text-align: center;
+}
+.hct-promo.is-hovered h5 {
+  color: var(--orange-1);
+}
+.hct-promo > a {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.hct-promo--content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hct-promo--content svg {
+  margin-left: 0.25rem;
+  color: var(--orange-6);
+  width: 1rem;
+  height: 1rem;
+}
+.hct-promo h5 {
+  font-family: var(--body-font-family);
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--font-size-sm);
+  color: var(--orange-4);
+}
+.hct-promo h5 span {
+  display: inline-block;
+}
+.hct-promo h5 span:first-child {
+  margin-right: 0.5rem;
+}
+</style>

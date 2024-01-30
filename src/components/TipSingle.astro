@@ -1,0 +1,123 @@
+---
+import { getEntry, getCollection } from 'astro:content';
+
+import Breadcrumb from '@/components/shared/Breadcrumb.astro';
+import PostMeta from '@/components/shared/PostMeta.astro';
+
+const { page } = Astro.props;
+const { Content } = await page.render();
+
+const author = await getEntry('authors', page.data.author.id);
+const allPosts = await getCollection('posts');
+
+let indexMatch = -1;
+allPosts.forEach((post, index) => {
+  if (post.slug === page.slug) {
+    indexMatch = index;
+  }
+});
+
+const nextPost = allPosts[indexMatch + 1];
+const prevPost = allPosts[indexMatch - 1];
+
+---
+
+<section class="hct-single">
+  <div class="hct-inner">
+
+    <div class="hct-single--group">
+      <div class="hct-single--header">
+        <div class="hct-single--title">
+          <div class="hct-single--crumb">
+            <Breadcrumb />
+          </div>
+          <h1 class="hct-heading hct-heading--lg">{page.data.title}</h1>
+        </div>
+        <div class="hct-single--meta">
+          <PostMeta author={author} publishDate={page.data.published} />
+        </div>
+      </div>
+    </div>
+
+    <div class="hct-single--content">
+      <div class="hct-single--content-liner">
+        <Content />
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="hct-next">
+  <div class="hct-inner">
+    <div class="hct-next--item">
+      <h3>{nextPost.data.title}</h3>
+    </div>
+    <div class="hct-next--item">
+      
+    </div>
+  </div>
+</section>
+
+
+<style>
+.hct-single {
+  padding-top: 12rem;
+  padding-bottom: 4rem;
+  background: linear-gradient(to top, var(--slate-1) 0%, var(--slate-3) 100%);
+}
+
+.hct-single--crumb {
+  padding: 0 0 0.5rem;
+}
+
+.hct-single--content {
+  background-color: var(--slate-1);
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--slate-5);
+
+  .astro-code {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+}
+
+.hct-single--meta {
+  padding-top: 1rem;
+}
+
+.hct-next {
+  padding: 2rem 0;
+  min-height: 200px;
+  background-color: var(--slate-1);
+}
+
+@media (min-width: 767px) {
+  .hct-single .hct-inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hct-single--group {
+    position: relative;
+    width: 40%;
+  }
+
+  .hct-single--header {
+    position: sticky;
+    top: 11rem;
+    padding-bottom: 2rem;
+  }
+
+  .hct-single--title {
+    padding-top: 1rem;
+  }
+
+  .hct-single--content {
+    width: 55%;
+  }
+  .hct-single--content-liner {
+    padding: 1.5rem;
+  }
+}
+</style>

@@ -1,0 +1,96 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '@/assets/hubspot-cms-tips.jpg';
+
+const {
+  preTitle = 'Tutorials, Tips, & More',
+  title = 'To Help You Master HubSpot CMS',
+  description = 'HubSpot CMS is packed with features, and flexible enough to handle damn near anything. We show you how to master these tools so you can better serve your customers and grow your business.',
+  variant = 'default',
+  useSlot = false,
+} = Astro.props;
+---
+
+<section class:list={['hct-hero', `hct-hero--${variant}`]}>
+  <div class="hct-hero--centered">
+    <div class="hct-inner">
+
+      <div class="hct-hero--content">
+        <h5 class="hct-heading hct-heading--sm">{preTitle}</h5>
+        <h1 class="hct-heading hct-heading--xl">{title}</h1>
+        {(description && description.length > 0) && ( 
+          <p>{description}</p>
+        )}
+
+        {useSlot && ( 
+          <div class="hct-hero--actions">
+            <slot>
+              <a href="#main" class="hct-btn -primary -icon">
+                <span>View Resources</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m7 7 10 10"/><path d="M17 7v10H7"/></svg>
+              </a>
+              <a href="#submit" class="hct-btn -ghost">Submit a Resource</a>
+            </slot>
+          </div>
+        )}
+      </div>
+
+    </div>
+  </div>
+
+  {variant === 'default' && ( 
+    <div class="hct-hero--image">
+      <Image src={heroImage}
+        alt="Developing HubSpot Themes" width={1200} height={1800} />
+    </div>
+  )}
+</section>
+
+
+<style>
+.hct-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 12rem 0 7rem;
+}
+
+.hct-hero--centered {
+  padding-top: 1rem;
+}
+
+.hct-hero--content {
+  max-width: 40rem;
+
+  p {
+    color: var(--slate-11);
+  }
+}
+
+.hct-hero--actions {
+  padding-top: 1rem;
+}
+
+.hct-hero--image {
+  position: absolute;
+  top: -10%;
+  right: 0;
+  height: 120%;
+  width: 50%;
+  transform-style: preserve-3d;
+  perspective: 333px;
+  background-color: var(--orange-9);
+  transform-origin: center bottom;
+  transform: skewX(-9deg);
+
+  img {
+    display: block;
+    filter: grayscale(90%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 100% 50%;
+    opacity: 0.9;
+  }
+}
+</style>

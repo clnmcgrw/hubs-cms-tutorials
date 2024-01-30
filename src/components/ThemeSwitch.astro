@@ -1,0 +1,126 @@
+---
+
+---
+
+<div class="hct-themeswitch" transition:persist>
+  <button class="hct-themeswitch-btn" id="hct-theme-switcher">
+    <div class="hct-themeswitch--label hct-themeswitch--dark">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/><path d="M19 3v4"/><path d="M21 5h-4"/></svg>
+      <span>Dark Mode</span>
+    </div>
+    <div class="hct-themeswitch--label hct-themeswitch--light">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      <span>Light Mode</span>
+    </div>
+  </button>
+</div>
+
+
+<script>
+const themeToggle = document.getElementById('hct-theme-switcher');
+
+const MODE_CLASSNAMES = {
+  light: 'light-theme',
+  dark: 'dark-theme',
+};
+
+const MODES = Object.keys(MODE_CLASSNAMES);
+const MODE_LIGHT_KEY = MODES[0];
+const MODE_DARK_KEY = MODES[1];
+const MODE_STORAGE_KEY = 'hct.mode';
+
+const modeFromStorage = localStorage.getItem(MODE_STORAGE_KEY);
+let currentMode = modeFromStorage || MODE_LIGHT_KEY;
+
+const setThemeMode = (key = MODES[0]) => {
+  themeToggle?.classList.remove(`is-${currentMode}`);
+  const previousKey = key === MODES[0] ? MODES[1] : MODES[0];
+  document.documentElement.classList.remove(MODE_CLASSNAMES[previousKey]);
+  document.documentElement.classList.add(MODE_CLASSNAMES[key]);
+  localStorage.setItem(MODE_STORAGE_KEY, key);
+  themeToggle?.classList.add(`is-${key}`);
+  currentMode = key;
+};
+
+if (modeFromStorage !== MODE_LIGHT_KEY) {
+  setThemeMode(currentMode);
+}
+
+themeToggle?.addEventListener('click', event => {
+  event.preventDefault();
+  const nextMode = currentMode === MODE_LIGHT_KEY ? MODE_DARK_KEY : MODE_LIGHT_KEY;
+  setThemeMode(nextMode);
+});
+</script>
+
+<style>
+.hct-themeswitch-btn {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--slate-3);
+  color: var(--slate-9);
+  border-radius: var(--border-radius-default);
+  transition: color 0.3s ease;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.33rem;
+    stroke-width: 2.5;
+    transition: fill 0.3s ease;
+  }
+
+  &.is-dark {
+    .hct-themeswitch--light {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hct-themeswitch--dark {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+
+  &:hover {
+    color: var(--slate-11);
+
+    svg {
+      color: var(--orange-9);
+    }
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.hct-themeswitch--label {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+
+  span {
+    display: block;
+    padding-top: 0.05rem;
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.hct-themeswitch--dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(0);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hct-themeswitch--light {
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+</style>

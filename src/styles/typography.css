@@ -1,0 +1,50 @@
+/* headings */
+.hct-heading {
+  margin: 0 0 0.5rem;
+}
+
+.hct-heading--sm {
+  font-size: 1.1rem;
+  //font-family: var(--body-font-family);
+  //text-transform: uppercase;
+}
+
+.hct-heading--md {
+  font-size: 1.7rem;
+}
+
+.hct-heading--lg {
+  font-size: 2.2rem;
+}
+
+.hct-heading--xl {
+  font-size: 2.7rem;
+}
+
+@media (min-width: 520px) {
+  .hct-heading--md {
+    font-size: calc(1.7rem + 10 * ((100vw - 500px) / 960));
+  }
+
+  .hct-heading--lg {
+    font-size: calc(2.2rem + 16 * ((100vw - 500px) / 960));
+  }
+
+  .hct-heading--xl {
+    font-size: calc(2.7rem + 20 * ((100vw - 500px) / 960));
+  }
+}
+
+@media (min-width: 1199px) {
+  .hct-heading--md {
+    font-size: 2rem;
+  }
+
+  .hct-heading--lg {
+    font-size: 3rem;
+  }
+
+  .hct-heading--xl {
+    font-size: 4.3rem;
+  }
+}

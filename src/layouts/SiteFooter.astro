@@ -1,0 +1,319 @@
+---
+import Logo from '@/components/shared/Logo.astro';
+import ThemeSwitch from '@/components/ThemeSwitch.astro';
+---
+
+<footer id="hct-footer" class="hct-footer">
+  <div class="hct-footer--cta">
+    <div class="hct-inner">
+      <div class="hct-footer--cta-text">
+        <h4 class="hct-heading hct-heading--md">Get Updates When We Resease New Resources</h4>
+        <p>👉 One email per month, no spam, we don't share your data.</p>
+      </div>
+      
+      <div class="hct-footer--form" transition:persist>
+        <div class="hct-form hct-form--cta">
+          <div id="hct-cta-form" ></div>
+          <div class="hct-form--cta-trigger">
+            <button id="hct-form-cta-trigger">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hct-footer--main">
+    <div class="hct-inner">
+
+      <div class="hct-footer--group">
+        <div class="hct-footer--brand">
+          <Logo />
+          <p>Brought to you by <a href="#0">Magnetic Creative</a></p>
+        </div>
+        <div class="hct-footer--controls">
+          <ThemeSwitch />
+        </div>
+      </div>
+
+      <div class="hct-footer--nav">
+        <div class="hct-footer--nav-group">
+          <h5 class="hct-heading hct-heading--sm">About Us</h5>
+          <ul>
+            <li><a href="#0">Why This Project?</a></li>
+            <li><a href="#0">Our Agency</a></li>
+            <li><a href="#0">Our Services</a></li>
+          </ul>
+        </div>
+        <div class="hct-footer--nav-group">
+          <h5 class="hct-heading hct-heading--sm">Resources</h5>
+          <ul>
+            <li><a href="#0">🔥 All Tips</a></li>
+            <li><a href="#0">📚 All Tutorials</a></li>
+            <li><a href="#0">🛒 Modules & Themes</a></li>
+          </ul>
+        </div>
+        <div class="hct-footer--nav-group">
+          <h5 class="hct-heading hct-heading--sm">Contribute</h5>
+          <ul>
+            <li><a href="#0">Submit a Resource</a></li>
+            <li><a href="#0">View Github Repo</a></li>
+            <li><a href="#0">Report a Bug</a></li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+  <div class="hct-footer--bottom">
+    <div class="hct-inner">
+      <p>&copy; 2023 <span>//</span> Magnetic Creative</p>
+      <ul>
+        <li><a href="#0">License</a></li>
+        <li><a href="#0">Privacy & Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+import { loadScript } from '@/lib/utilities';
+
+const renderForm = () => {
+  const formTarget = document.getElementById('hct-cta-form');
+  const onReady = () => {
+    const trigger = document.getElementById('hct-form-cta-trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', event => {
+      event.preventDefault();
+      const embedBtn = formTarget?.querySelector('input[type="submit"]');
+      embedBtn?.click();
+    })
+  };
+
+  const onSubmitted = () => {
+    formTarget?.parentElement?.classList.add('is-submitted');
+  };
+
+  const thankYouMessage = `
+    <div class="hct-ty">
+      <div class="hct-ty--title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/><path d="m16 19 2 2 4-4"/></svg>
+        <h3>You're All Set</h3>
+      </div>
+      <p>Keep an eye on your inbox!</p>
+    </div>
+  `;
+
+  window.hbspt.forms.create({
+    region: "na1",
+    portalId: "2661418",
+    target: "#hct-cta-form",
+    formId: "80ca6a2b-c408-434e-9dcc-c949572cfcb1",
+    inlineMessage: thankYouMessage,
+    onFormReady: onReady,
+    onFormSubmitted: onSubmitted,
+  });
+};
+
+try {
+  await loadScript('//js.hsforms.net/forms/embed/v2.js', 'hs-forms');
+  if (window.hbspt) {
+    renderForm();
+  }
+} catch (e) {
+  console.log(e);
+}
+</script>
+
+
+<style>
+.hct-footer--cta {
+  position: relative;
+  padding: 3rem 0 2rem;
+  border-top: 1px solid var(--slate-5);
+  border-bottom: 1px solid var(--slate-5);
+}
+
+.hct-footer--cta-text {
+  color: var(--slate-12);
+
+  p {
+    color: var(--slate-11);
+  }
+}
+
+.hct-form--cta-trigger {
+  position: absolute;
+  top: 1px;
+  right: -2px;
+  
+  button {
+    outline: none;
+    height: 3rem;
+    width: 3.5rem;
+    color: var(--orange-9);
+  }
+}
+
+.hct-form--cta {
+  position: relative;
+
+  &.is-submitted {
+    .hct-form--cta-trigger {
+      opacity: 0;
+      visiblity: hidden;
+    }
+  }
+}
+
+.hct-footer--form {
+  padding-top: 1rem;
+}
+
+.hct-footer--main {
+  padding: 3rem 0 3rem;
+  background-color: var(--slate-1);
+}
+
+.hct-footer--liner {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.hct-footer--brand {
+  padding-bottom: 1rem;
+
+  p {
+    margin: 0;
+    color: var(--slate-11);
+    font-size: var(--font-size-sm);
+  }
+}
+
+.hct-footer--nav {
+  padding-top: 3rem;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.15rem 0;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--slate-11);
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--orange-9);
+    }
+  }
+}
+
+.hct-footer--nav-group {
+  margin-bottom: 2rem;
+
+  .hct-heading {
+    margin: 0 0 1rem;
+  }
+}
+
+.hct-footer--bottom {
+  line-height: 1;
+  padding: 0.5rem 0;
+  font-size: var(--font-size-sm);
+  border-top: 1px solid var(--slate-5);
+
+  .hct-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > p {
+      color: var(--slate-10);
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin-left: 0.5rem;
+    }
+
+    a {
+      display: block;
+      color: var(--slate-9);
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--orange-9);
+      }
+    }
+  }
+}
+
+@media (min-width: 767px) {
+  .hct-footer--cta .hct-inner,
+  .hct-footer--main .hct-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hct-footer--brand {
+    padding-bottom: 2rem;
+  }
+
+  .hct-footer--form {
+    padding-top: 0.5rem;
+    min-width: 20rem;
+    margin-left: 1rem;
+  }
+
+  .hct-footer--main {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .hct-footer--nav {
+    padding-top: 0;
+    flex-grow: 2;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hct-footer--nav-group {
+    margin-bottom: 0;
+  }
+
+  .hct-footer--nav-group {
+    margin-left: 2.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .hct-footer--nav-group {
+    margin-left: 5rem;
+  }
+}
+
+@media (min-width: 1199px) {
+  .hct-footer--form {
+    min-width: 27rem;
+  }
+}
+</style>

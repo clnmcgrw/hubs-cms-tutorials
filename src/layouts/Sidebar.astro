@@ -1,0 +1,30 @@
+---
+
+const {
+  title = 'Tips',
+  description = '',
+} = Astro.props;
+---
+
+<div class="hct-sidebar">
+  <div class="hct-sidebar--title">
+    <h3 class="hct-heading hct-heading--md">{title}</h3>
+    <p>{description}</p>
+  </div>
+  <div class="hct-sidebar--content">
+    <slot />
+  </div>
+</div>
+
+<style>
+.hct-sidebar--title {
+  padding-top: 1.5rem;
+
+  p {
+    width: 70%;
+    font-size: var(--font-size-sm);
+    color: var(--slate-11);
+  }
+}
+</style>
+

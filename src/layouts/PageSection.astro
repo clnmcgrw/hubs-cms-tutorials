@@ -1,0 +1,56 @@
+---
+---
+
+<section class="hct-body">
+  <div class="hct-inner">
+
+    <div class="hct-body--content">
+      
+      <div class="hct-body--sidebar">
+        <div class="hct-body--sticky">
+          <slot name="sidebar"></slot>
+        </div>
+      </div>
+
+      <div class="hct-body--main">
+        <slot>
+          <h1>Add Content</h1>
+        </slot>
+      </div>
+    
+    </div>
+
+  </div>
+</section>
+
+<style>
+.hct-body {
+  border-top: 1px solid var(--slate-5);
+  background-color: var(--slate-1);
+}
+
+.hct-body--content {
+  padding: 2rem 0 3rem;
+}
+
+@media (min-width: 767px) {
+  .hct-body--content {
+    display: flex;
+    padding: 3rem 0 4rem;
+  }
+
+  .hct-body--sidebar {
+    position: relative;
+    width: 30%;
+  }
+
+  .hct-body--sticky {
+    position: sticky;
+    top: 9rem;
+  }
+
+  .hct-body--main {
+    width: 70%;
+  }
+}
+</style>

@@ -1,0 +1,25 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Head from '@/layouts/Head.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import PageSection from '@/layouts/PageSection.astro';
+import Sidebar from '@/layouts/Sidebar.astro';
+import TipsList from '@/components/TipsList.astro';
+---
+
+<Layout bodyClass="homepage" promoBar>
+	<HeroSection useSlot />
+	<div id="resources">
+		<PageSection>
+			<Sidebar slot="sidebar" title="🔥 Tips"
+				description="Examples and snippets to help you do more w/ HubSpot CMS">
+				<ul>
+					<li><a href="#0">Beginner</a></li>
+					<li><a href="#0">Intermediate</a></li>
+					<li><a href="#0">Advanceed</a></li>
+				</ul>
+			</Sidebar>
+			<TipsList homepage viewAll />
+		</PageSection>
+	</div>
+</Layout>

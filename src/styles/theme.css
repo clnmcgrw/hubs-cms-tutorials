@@ -1,0 +1,41 @@
+@import '@radix-ui/colors/slate.css';
+@import '@radix-ui/colors/slate-dark.css';
+@import '@radix-ui/colors/orange.css';
+@import '@radix-ui/colors/orange-dark.css';
+
+:root {
+  --gray-1: var(--slate-1);
+  --gray-2: var(--slate-2);
+  --gray-3: var(--slate-3);
+  --gray-4: var(--slate-4);
+  --gray-5: var(--slate-5);
+  --gray-6: var(--slate-6);
+  --gray-7: var(--slate-7);
+  --gray-8: var(--slate-8);
+  --gray-9: var(--slate-9);
+  --gray-10: var(--slate-10);
+  --gray-11: var(--slate-11);
+
+  --font-size-xs: 0.8rem;
+  --font-size-sm: 0.9rem;
+  --font-size-default: 1rem;
+  --font-size-lead: 1.1rem;
+
+  --heading-size-md: 1.7rem;
+  --heading-size-lg: 2rem;
+  --heading-size-xl: 2.35rem;
+  --heading-size-xxl: 3rem;
+
+  --font-weight-normal: 400;
+  --font-weight-semi-bold: 500;
+  --font-weight-bold: 700;
+
+  --body-font-family: 'DM Sans', sans-serif;
+  --heading-font-family: 'DM Serif Display', serif;
+  --mono-font-family: 'DM Mono', monospace;
+
+  --border-radius-default: 0.33rem;
+
+  --ease-smooth: cubic-bezier(0.75, 0, 0.25, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+}

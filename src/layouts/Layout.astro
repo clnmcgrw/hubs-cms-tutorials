@@ -1,0 +1,25 @@
+---
+import Head from '@/layouts/Head.astro';
+import SiteHeader from '@/layouts/SiteHeader.astro';
+import SiteFooter from '@/layouts/SiteFooter.astro';
+
+import '@/styles/index.css';
+
+const {
+	bodyClass = 'layout-default',
+	promoBar = false,
+	seo = {},
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<Head seo={seo} />
+	<body class={bodyClass}>
+		<SiteHeader promoBar={promoBar} />
+		<main role="main" class="hct-main">
+			<slot />
+		</main>
+		<SiteFooter />
+	</body>
+</html>

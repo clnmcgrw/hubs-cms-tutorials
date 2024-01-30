@@ -1,0 +1,42 @@
+---
+title: Disable Author or Tag Listing Pages For a Blog
+excerpt: By default, any HubSpot CMS blog will come with author & tag archive pages. In some cases, we want to disable these archive pages in a way that doesn't hurt SEO and traffic.
+draft: true
+published: 2023-11-17
+author: colin-mcgraw
+difficulty: beginner
+homepage: true
+---
+
+### Intro
+
+HubSpot Blogs come w/ built-in author and tag archive pages. It's common for these pages to contain very similar or nearly identical content to other blog listing pages. 
+
+### Setting Redirects
+
+The ideal way to disable tag and/or author archive pages on a HubSpot blog is to set up flexible 301 redirects in the domain settings of your HubSpot portal.
+
+```js
+const variable = 'something';
+function doThings(things) {
+  console.log(things);
+};
+```
+
+### Using HubL Logic
+
+As an alternative to setting redirect patterns, you can use the HubL function `set_response_code` to make the tag or author pages return a 404 (and hence not be indexed by search engines).
+
+```jinja-html
+{% if blog_author or topic %}
+  {{set_response_code(404)}}
+{% endif %}
+```
+
+You could also conditionally render a no-index meta tag...
+
+```jinja-html
+{% if blog_author or topic %}
+  <meta name="robots" content="noindex" />
+{% endif %}
+```

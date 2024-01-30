@@ -1,0 +1,45 @@
+---
+
+const defaultCrumbs = [
+  { emoji: '🔥', label: 'Tips', href: '/tips' }
+];
+const { crumbs = defaultCrumbs } = Astro.props;
+---
+
+<ol class="hct-crumbs">
+  <li>
+    <span>🏠</span>
+    <a href="/">Home</a>
+  </li>
+  {crumbs.map(crumb => ( 
+    <li>
+      <span>{crumb.emoji}</span>
+      <a href="/">{crumb.label}</a>
+    </li>
+  ))}
+</ol>
+
+<style>
+.hct-crumbs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline-block;
+    font-size: var(--font-size-sm);
+    margin-right: 0.65rem;
+
+    > span {
+      display: inline-block;
+      margin-right: 0.15rem;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: var(--font-weight-bold);
+    color: var(--slate-10);
+  }
+}
+</style>
